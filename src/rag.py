@@ -14,7 +14,7 @@ vectorstore = FAISS.load_local(
 )
 
 # 2. The LLM
-llm = ChatGoogleGenerativeAI(model="gemini-flash-latest")
+llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite", max_retries=2)
 
 # 3. The prompt template - the anti-hallucination contract
 prompt = ChatPromptTemplate.from_template("""
@@ -34,10 +34,17 @@ def ask(question):
     context = "\n\n".join(doc.page_content for doc in docs)
     messages = prompt.format_messages(context=context, question=question)
     response = llm.invoke(messages)
-    return response.content
+    return {
+        "answer": response.content,
+        "sources": [doc.page_content[:200] for doc in docs],
+    }
 
 # 5. Test it
 if __name__ == "__main__":
-    q = "Who won the last cricket world cup?"
+    q = "What is overfitting according to the book?"
+    result = ask(q)
     print("Q:", q)
-    print("A:", ask(q))
+    print("A:", result["answer"])
+    print("\n---- Sources used ----")
+    for i, s in enumerate(result["sources"], 1):
+        print(f"[{i}] {s}\n")

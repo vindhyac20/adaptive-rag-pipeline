@@ -1,0 +1,42 @@
+[
+  {
+    "question": "What is overfitting according to the book?",
+    "ground_truth": "A hypothesis h overfits the training data if there exists an alternative hypothesis h' such that h has smaller error than h' on the training examples, but h' has smaller error over the entire distribution of instances."
+  },
+  {
+    "question": "What are the three features that define a well-posed learning problem?",
+    "ground_truth": "A learning problem is defined by the task T, the performance measure P, and the training experience E. A program learns if its performance at T, measured by P, improves with experience E."
+  },
+  {
+    "question": "What is entropy in the context of decision tree learning?",
+    "ground_truth": "Entropy characterizes the impurity of a collection of examples. For a collection S with positive and negative examples, entropy is defined as -p_plus * log2(p_plus) - p_minus * log2(p_minus), where p_plus and p_minus are the proportions of positive and negative examples. Entropy is 0 if all members belong to one class and 1 when the collection has equal numbers of positive and negative examples."
+  },
+  {
+    "question": "What is information gain and how is it used in ID3?",
+    "ground_truth": "Information gain is the expected reduction in entropy caused by partitioning the examples according to an attribute. ID3 uses information gain to select the best attribute to test at each node in the tree, choosing the attribute with the highest information gain."
+  },
+  {
+    "question": "What is a perceptron and how does it classify inputs?",
+    "ground_truth": "A perceptron takes a vector of real-valued inputs, calculates a linear combination of these inputs with weights, and outputs 1 if the result is greater than some threshold and -1 otherwise. It can represent linearly separable functions."
+  },
+  {
+    "question": "What error does the backpropagation algorithm try to minimize?",
+    "ground_truth": "Backpropagation learns the weights of a multilayer network by using gradient descent to minimize the squared error between the network output values and the target values for these outputs, summed over all output units and training examples."
+  },
+  {
+    "question": "What is the naive Bayes assumption?",
+    "ground_truth": "The naive Bayes classifier assumes that the attribute values are conditionally independent given the target value. Under this assumption, the probability of observing a conjunction of attributes is the product of the probabilities for the individual attributes."
+  },
+  {
+    "question": "What is a maximum a posteriori (MAP) hypothesis?",
+    "ground_truth": "A MAP hypothesis is the most probable hypothesis given the observed data D. It is found by maximizing P(D|h)P(h) over all hypotheses in H, using Bayes theorem."
+  },
+  {
+    "question": "How does the k-nearest neighbor algorithm classify a new instance?",
+    "ground_truth": "K-nearest neighbor assumes instances are points in n-dimensional space and classifies a new instance by finding its k nearest training examples based on Euclidean distance, then assigning the most common value among these k neighbors."
+  },
+  {
+    "question": "What is the inductive bias of the ID3 algorithm?",
+    "ground_truth": "ID3's inductive bias is a preference for shorter trees over larger trees, and for trees that place attributes with high information gain closest to the root. It is a preference bias arising from its search strategy rather than a restriction of the hypothesis space."
+  }
+]
