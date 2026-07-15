@@ -6,7 +6,7 @@ from langchain_community.vectorstores import FAISS
 # Step 1: Load the book
 reader = PdfReader("data/MachineLearningTomMitchell.pdf")
 full_text = ""
-for page in reader.pages[15:]:
+for page in reader.pages[12:]:
     page_text = page.extract_text()
     if page_text:
         full_text += page_text + "\n"
