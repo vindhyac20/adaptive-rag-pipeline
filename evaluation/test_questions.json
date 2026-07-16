@@ -38,5 +38,45 @@
   {
     "question": "What is the inductive bias of the ID3 algorithm?",
     "ground_truth": "ID3's inductive bias is a preference for shorter trees over larger trees, and for trees that place attributes with high information gain closest to the root. It is a preference bias arising from its search strategy rather than a restriction of the hypothesis space."
+  },
+{
+    "question": "What is the difference between sample error and true error?",
+    "ground_truth": "The sample error of a hypothesis is the fraction of examples it misclassifies over a particular sample of data. The true error is the probability that the hypothesis will misclassify a single randomly drawn instance from the underlying distribution. Sample error is what we can measure; true error is what we actually want to know."
+  },
+  {
+    "question": "Why is Bayes theorem important in machine learning?",
+    "ground_truth": "Bayes theorem provides a way to calculate the posterior probability of a hypothesis P(h|D) from the prior probability P(h), the probability of the data given the hypothesis P(D|h), and the probability of the data P(D). It forms the basis for learning methods that directly manipulate probabilities and provides a framework for analyzing other learning methods."
+  },
+  {
+    "question": "What does the brute-force MAP learning algorithm do?",
+    "ground_truth": "The brute-force MAP learning algorithm calculates the posterior probability P(h|D) for every hypothesis h in H using Bayes theorem, then outputs the hypothesis with the highest posterior probability. It is generally impractical because it requires computing the posterior for every hypothesis in the space."
+  },
+  {
+    "question": "What is the minimum description length principle?",
+    "ground_truth": "The minimum description length principle recommends choosing the hypothesis that minimizes the combined length of the description of the hypothesis plus the description of the data given the hypothesis. It can be interpreted as preferring hypotheses that best compress the data, and provides a way of trading off hypothesis complexity against errors."
+  },
+  {
+    "question": "What does it mean for a concept class to be PAC-learnable?",
+    "ground_truth": "A concept class is PAC-learnable (probably approximately correct) if a learner can, with probability at least 1 minus delta, output a hypothesis with error at most epsilon, in time polynomial in 1/epsilon, 1/delta, the size of instances, and the size of the target concept."
+  },
+  {
+    "question": "What is the VC dimension of a hypothesis space?",
+    "ground_truth": "The VC dimension of a hypothesis space H is the size of the largest finite set of instances that can be shattered by H, where shattering means H can represent every possible dichotomy of the set. It measures the expressive capacity of the hypothesis space and is used to bound the number of training examples needed."
+  },
+  {
+    "question": "How do genetic algorithms generate new hypotheses?",
+    "ground_truth": "Genetic algorithms maintain a population of hypotheses, usually represented as bit strings, and generate successors through operations inspired by biological evolution: crossover, which combines parts of two parent hypotheses, and mutation, which randomly changes bits. Hypotheses are selected for reproduction based on their fitness."
+  },
+  {
+    "question": "What is explanation-based learning?",
+    "ground_truth": "Explanation-based learning uses prior knowledge in the form of a domain theory to analyze or explain individual training examples, then generalizes the explanation. This allows learning from very few examples by relying on the domain theory to distinguish relevant features from irrelevant ones."
+  },
+  {
+    "question": "What does the Q function represent in Q-learning?",
+    "ground_truth": "The Q function Q(s, a) represents the maximum discounted cumulative reward the agent can achieve by taking action a in state s and following the optimal policy thereafter. Learning Q allows the agent to select optimal actions without knowing the reward and state transition functions in advance."
+  },
+  {
+    "question": "How does an agent receive feedback in reinforcement learning?",
+    "ground_truth": "In reinforcement learning, the agent receives feedback in the form of rewards from the environment after performing actions in states. The reward may be delayed and sparse, and the agent's task is to learn a policy that maximizes the cumulative reward over time, rather than being told the correct action for each state."
   }
 ]
