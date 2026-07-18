@@ -1,0 +1,42 @@
+[
+  {
+    "question": "How can a machine avoid just memorizing training data instead of actually learning?",
+    "ground_truth": "This is the problem of overfitting. A hypothesis h overfits the training data if there exists an alternative hypothesis h' such that h has smaller error than h' on the training examples, but h' has smaller error over the entire distribution of instances. Approaches to avoid it include stopping tree growth early or post-pruning, and using validation sets."
+  },
+  {
+    "question": "Is there a formula that measures how messy or mixed-up a dataset is?",
+    "ground_truth": "Yes, entropy measures the impurity of a collection of examples. For a boolean classification it is -p_plus*log2(p_plus) - p_minus*log2(p_minus). Entropy is 0 if all examples belong to one class and 1 when classes are equally mixed."
+  },
+  {
+    "question": "How do computers learn to make decisions from trial and error with rewards?",
+    "ground_truth": "This is reinforcement learning. The agent performs actions in states and receives rewards from the environment, which may be delayed. The agent learns a policy that maximizes cumulative reward, for example by learning the Q function, which gives the maximum discounted cumulative reward achievable from taking an action in a state."
+  },
+  {
+    "question": "Which learning method just stores examples and does nothing until asked a question?",
+    "ground_truth": "Instance-based methods like k-nearest neighbor are sometimes called lazy learning methods because they simply store the training examples and delay processing until a new instance must be classified. K-nearest neighbor classifies a new instance by the most common value among its k nearest training examples."
+  },
+  {
+    "question": "Why does a spam filter multiply probabilities of individual words together?",
+    "ground_truth": "This reflects the naive Bayes assumption: attribute values are conditionally independent given the target value, so the probability of observing a conjunction of attributes is the product of the individual attribute probabilities. The naive Bayes classifier uses this to compute the most probable target value."
+  },
+  {
+    "question": "What tells us how many training examples we need before we can trust a learner?",
+    "ground_truth": "Sample complexity, studied in computational learning theory. Within the PAC framework, bounds relate the number of training examples to confidence and error parameters, and the VC dimension of the hypothesis space is used to bound the number of examples needed."
+  },
+  {
+    "question": "How does survival of the fittest apply to learning algorithms?",
+    "ground_truth": "Genetic algorithms maintain a population of hypotheses and evolve them using operations inspired by biological evolution. Hypotheses are selected for reproduction based on fitness, and new hypotheses are generated through crossover, which combines parts of two parents, and mutation, which randomly alters bits."
+  },
+  {
+    "question": "Can a program learn better if it already knows rules about the world?",
+    "ground_truth": "Yes, analytical methods like explanation-based learning use prior knowledge in the form of a domain theory to explain training examples and generalize the explanations. This allows learning from very few examples by using the domain theory to identify relevant features."
+  },
+  {
+    "question": "What is the simplest brain-inspired unit that draws a line between two groups?",
+    "ground_truth": "The perceptron. It computes a linear combination of real-valued inputs with weights and outputs 1 if the result exceeds a threshold and -1 otherwise. It can only represent linearly separable functions, meaning classes separable by a hyperplane."
+  },
+  {
+    "question": "How do neural networks figure out which internal connections to blame for a wrong answer?",
+    "ground_truth": "The backpropagation algorithm propagates error backwards through the network, using gradient descent to adjust weights so as to minimize the squared error between network outputs and target values, summed over all output units and training examples."
+  }
+]

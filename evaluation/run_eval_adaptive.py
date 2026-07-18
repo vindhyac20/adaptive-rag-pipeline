@@ -5,10 +5,10 @@ sys.path.append("src")
 
 from adaptive_rag import adaptive_ask
 
-with open("evaluation/test_questions.json", encoding="utf-8") as f:
+with open("evaluation/hard_questions.json", encoding="utf-8") as f:
     test_set = json.load(f)
 
-print(f"Running ADAPTIVE evaluation on {len(test_set)} questions...\n")
+print(f"Running ADAPTIVE evaluation on {len(test_set)} HARD questions...\n")
 
 results = []
 for i, item in enumerate(test_set, 1):
@@ -32,7 +32,7 @@ for i, item in enumerate(test_set, 1):
 
     time.sleep(20)
 
-with open("evaluation/eval_results_adaptive.json", "w", encoding="utf-8") as f:
+with open("evaluation/eval_results_hard_adaptive.json", "w", encoding="utf-8") as f:
     json.dump(results, f, indent=2)
 
-print("Saved to evaluation/eval_results_adaptive.json")
+print("Saved to evaluation/eval_results_hard_adaptive.json")
