@@ -11,7 +11,7 @@ load_dotenv()
 
 answer_relevancy.strictness = 1
 
-with open("evaluation/eval_results_adaptive.json", encoding="utf-8") as f:
+with open("evaluation/eval_results_hard_adaptive.json", encoding="utf-8") as f:
     results = json.load(f)
 
 dataset = Dataset.from_list(results)
@@ -27,9 +27,9 @@ scores = evaluate(
     run_config=RunConfig(max_workers=1, max_retries=3, timeout=120),
 )
 
-print("\n===== ADAPTIVE SCORES =====")
+print("\n===== HARD ADAPTIVE SCORES =====")
 print(scores)
 
 df = scores.to_pandas()
-df.to_csv("evaluation/adaptive_scores.csv", index=False)
-print("Per-question scores saved to evaluation/adaptive_scores.csv")
+df.to_csv("evaluation/hard_adaptive_scores.csv", index=False)
+print("Per-question scores saved to evaluation/hard_adaptive_scores.csv")
