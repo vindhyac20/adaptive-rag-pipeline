@@ -30,7 +30,7 @@ for i, item in enumerate(test_set, 1):
     flag = " [REWRITE]" if result["rewritten_query"] else ""
     print(f"    done in {elapsed:.1f}s{flag}\n")
 
-    time.sleep(20)
+    time.sleep(30)
 
 with open("evaluation/eval_results_hard_adaptive.json", "w", encoding="utf-8") as f:
     json.dump(results, f, indent=2)

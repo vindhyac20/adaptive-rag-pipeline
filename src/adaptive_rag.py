@@ -12,7 +12,7 @@ embeddings = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-
 vectorstore = FAISS.load_local(
     "faiss_index", embeddings, allow_dangerous_deserialization=True
 )
-llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite", max_retries=2)
+llm = ChatGoogleGenerativeAI(model="gemini-3.1-flash-lite", max_retries=6)
 
 # --- Grader: judges whether a retrieved chunk is relevant ---
 grade_prompt = ChatPromptTemplate.from_template("""
@@ -47,7 +47,7 @@ def rewrite_query(question):
     return response.content.strip()
 
 # --- Adaptive retrieval: retrieve -> grade -> rewrite & retry once if needed ---
-def adaptive_ask_retrieve(question, k=4, min_relevant=2):
+def adaptive_ask_retrieve(question, k=4, min_relevant=3):
     """Retrieve with grading; rewrite and retry once if grading fails."""
     docs = vectorstore.similarity_search(question, k=k)
     relevant = [d for d in docs if grade_chunk(question, d.page_content)]
@@ -63,11 +63,50 @@ def adaptive_ask_retrieve(question, k=4, min_relevant=2):
 
     return relevant, rewritten
 
-# --- Test on the historic k-means failure case ---
+# --- Answer prompt: same contract as baseline rag.py ---
+answer_prompt = ChatPromptTemplate.from_template("""
+Answer the question using ONLY the context below.
+If the context does not contain the answer, say "I don't know based on the provided documents."
+
+Context:
+{context}
+
+Question: {question}
+
+Answer:""")
+
+def adaptive_ask(question, k=4, min_relevant=3):
+    """Full adaptive RAG: graded retrieval with retry, then grounded generation.
+    When a rewrite fired, the rewritten phrasing is appended to the question at
+    generation time so the model can bridge vocabulary between question and context."""
+    relevant, rewritten = adaptive_ask_retrieve(question, k=k, min_relevant=min_relevant)
+
+    if not relevant:
+        return {
+            "answer": "I don't know based on the provided documents.",
+            "sources": [],
+            "contexts": [],
+            "rewritten_query": rewritten,
+        }
+
+    context = "\n\n".join(doc.page_content for doc in relevant)
+    generation_question = question
+    if rewritten:
+        generation_question = f"{question}\n(Equivalently phrased: {rewritten})"
+    messages = answer_prompt.format_messages(context=context, question=generation_question)
+    response = llm.invoke(messages)
+    return {
+        "answer": response.content,
+        "sources": [doc.page_content[:200] for doc in relevant],
+        "contexts": [doc.page_content for doc in relevant],
+        "rewritten_query": rewritten,
+    }
+
+# --- Smoke test ---
 if __name__ == "__main__":
-    q = "What is the kmeans algorithm in machine learning?"
-    print(f"Question: {q}\n")
-    relevant, rewritten = adaptive_ask_retrieve(q)
-    print(f"\nFinal relevant chunks: {len(relevant)}")
-    for i, doc in enumerate(relevant, 1):
-        print(f"[{i}] {doc.page_content[:120]}...\n")
+    q = "Why does a spam filter multiply probabilities of individual words together?"
+    result = adaptive_ask(q)
+    print("Q:", q)
+    if result["rewritten_query"]:
+        print("(rewritten as:", result["rewritten_query"] + ")")
+    print("A:", result["answer"])
