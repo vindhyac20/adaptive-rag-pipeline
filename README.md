@@ -1,6 +1,6 @@
 # Design, Evaluation, and Optimization of a RAG System for Long-Form Technical Documents
 
-🔗 **[Try the live demo](https://adaptive-rag-pipeline-deploy-j9dwp8onxhzy958tuno8u2.streamlit.app/)**
+**[Try the live demo](https://adaptive-rag-pipeline-deploy-j9dwp8onxhzy958tuno8u2.streamlit.app/)**
 
 An adaptive Retrieval-Augmented Generation pipeline over a 400+ page ML textbook, with self-correcting retrieval and RAGAS-based evaluation.
 
@@ -10,7 +10,7 @@ Ask questions about Tom Mitchell's *Machine Learning* textbook in plain English 
 
 ## Architecture
 
-PDF → text extraction (pypdf) → cleaning (front-matter removal) → chunking (1000 chars, 200 overlap) → embeddings (all-MiniLM-L6-v2) → FAISS vector store → graded retrieval (LLM relevance judge) → query rewriting on low relevance → grounded generation (Gemini Flash-Lite) → RAGAS evaluation
+PDF -> text extraction (pypdf) -> cleaning (front-matter removal) -> chunking (1000 chars, 200 overlap) -> embeddings (all-MiniLM-L6-v2) -> FAISS vector store -> graded retrieval (LLM relevance judge) -> query rewriting on low relevance -> grounded generation (Gemini Flash-Lite) -> RAGAS evaluation
 
 ## The problem it solves
 
